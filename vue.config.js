@@ -8,6 +8,10 @@ module.exports = {
     publicPath: "/admin/",
     chainWebpack,
     devServer: {
-        historyApiFallback: true
+        historyApiFallback: {
+            rewrites: [
+                { from: /^.*/, to: '/admin/index.html'}
+            ]
+        }
     }
 };
