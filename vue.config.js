@@ -4,7 +4,7 @@ const chainWebpack = config => {
         .use(require("webpack-bundle-analyzer").BundleAnalyzerPlugin);
 };
 
-module.export = {
+module.exports = {
     publicPath: "/admin/",
     chainWebpack,
     devServer: {
