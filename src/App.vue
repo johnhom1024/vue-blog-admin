@@ -1,28 +1,39 @@
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<template lang="pug">
+    v-app
+        router-view
+        v-snackbar(v-model="snackbar.show" :top="true" :color="snackbar.color") {{snackbar.text}}
+            v-btn(flat @click="snackbar.show = false") 关闭
+        v-dialog(v-model="isLoading" width="300" persistent)
+            v-card(color="primary" dark)
+                v-card-text
+                    span 请求中...
+                    v-progress-linear.mb-0(color="white" indeterminate)
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { mapState } from "vuex";
 
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
-}
+    name: "App",
+    data() {
+        return {
+            //
+        };
+    },
+    mounted() {
+        // this.$store.commit("closeLoading");
+    },
+    methods: {},
+    computed: {
+        ...mapState(["isLoading"]),
+        snackbar: {
+            get() {
+                return this.$store.state.snackbar;
+            },
+            set(value) {
+                this.$store.commit("closeSnackbar");
+            }
+        }
+    }
+};
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
