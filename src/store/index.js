@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import createPersistedState from "vuex-persistedstate";
 
 const state = {
     isLoading: false,
@@ -9,6 +8,13 @@ const state = {
         color: "", // success / error / info / warning
         text: null
     },
+    confirmDialog: {
+        show: false,
+        title: null,
+        text: null,
+        func: null,
+        params: null,
+    }
 };
 
 const mutations = {
@@ -30,6 +36,24 @@ const mutations = {
             state.isLoading = false;
         }, 500);
     },
+    openConfirm(state, payload) {
+        state.confirmDialog = {
+            show: true,
+            title: payload.title,
+            text: payload.text,
+            func: payload.func,
+            params: payload.params
+        }
+    },
+    closeConfirm(state) {
+        state.confirmDialog = {
+            show: false,
+            title: null,
+            text: null,
+            func: null,
+            params: null
+        }
+    }
 }
 
 Vue.use(Vuex);
@@ -38,7 +62,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state,
     mutations,
-    plugins: [createPersistedState()],
+    // plugins: [createPersistedState()],
     // modules: {}
 });
 
