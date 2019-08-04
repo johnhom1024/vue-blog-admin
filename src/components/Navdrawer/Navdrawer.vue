@@ -1,51 +1,47 @@
 <template lang="pug">
     v-navigation-drawer(permanent app)
-        v-toolbar(flat)
-            v-toolbar-side-icon
-            v-toolbar-title Article admin
+        v-app-bar(flat)
+        <v-divider></v-divider>
         v-list
             template(v-for="item in nav")
                 v-list-group(
+                    no-action
                     v-if="item.children"
                     :key="item.title"
-                    v-model="item.active"
                     :prepend-icon="item.icon"
+                    value="true"
                 )
                     template(v-slot:activator)
-                        v-list-tile
-                            v-list-tile-content
-                                v-list-tile-title {{ item.title }}
-                    v-list-tile(
+                        v-list-item-content
+                            v-list-item-title {{ item.title }}
+                    v-list-item(
                         v-for="subItem in item.children"
                         :key="subItem.title"
                         @click=""
                         :to="subItem.to"
                     )
-                        v-list-tile-action
-                            v-icon {{ subItem.icon }}
-                        v-list-tile-content
-                            v-list-tile-title {{ subItem.title }}
-                v-list-tile(
+                        v-list-item-title {{ subItem.title }}
+                        v-list-item-icon
+                            v-icon(v-text="subItem.icon")
+                v-list-item(
                     v-else
                     :key="item.title"
-                    :prepend-icon="item.icon"
                     @click=""
                     :to="item.to"
                 )
-                    v-list-tile-action
-                        v-icon {{item.icon}}
-                    v-list-tile-content
-                        v-list-tile-title {{ item.title}}
+                    v-list-item-icon
+                        v-icon(v-text="item.icon")
+                    v-list-item-title {{ item.title}}
 </template>
 
 <script>
-import nav from './nav.js';
+import nav from "./nav.js";
 export default {
     data() {
         return {
             nav
-        }
+        };
     }
-}
+};
 </script>
 
