@@ -2,34 +2,26 @@
     v-card
         v-card-title.headline 类别列表
             v-spacer
-            v-dialog(v-model="categoryDialog.show" presistent max-width="500px")
-                template(v-slot:activator="{ on }")
-                    v-btn(color="primary" v-on="on") 文章录入
-                v-card
-                    v-card-title.headline 文章信息录入
-                    v-card-text
-                        p hello
+            add-cate-dialog(@update:category_list="getCategoryList")
         v-data-table(
             :items="category_list"
             :headers="headers"
             :disable-initial-sorr="true"
         )
-            template(v-slot:items="props")
-                td {{ props.item.cate_name }}
-                td(layout justify-center)
-                    v-icon(small).mr-2 edit
-                    v-icon(small).mr-2 delete
+            template(v-slot:item.action="{ item }")
+                v-icon(small class="mr-2" @click="editItem(item)") edit
+                v-icon(small @click="deleteItem(item)") delete
 </template>
 
-
 <script>
+import addCateDialog from './components/addCateDialog.vue';
 export default {
+    components: {
+        addCateDialog
+    },
     data() {
         return {
             category_list: [],
-            categoryDialog: {
-                show: false
-            },
             headers: [
                 {
                     text: '类名',
@@ -38,10 +30,9 @@ export default {
                     value: 'cate_name'
                 },
                 {
-                    text: '操作',
-                    algn: 'center',
-                    sortable: false,
-                    value: '_id'
+                    text: "操作",
+                    value: "action",
+                    sortable: false
                 }
             ]
 
@@ -52,8 +43,28 @@ export default {
     },  
     methods: {
         getCategoryList() {
-            this.$api.article.getCategoryList().then(res => {
-                this.category_list = res;
+            this.$store.commit("openLoading");
+            this.$api.category.getCategoryList().then( res => {
+                this.category_list = res.result;
+                this.$store.commit("closeLoading");
+            })
+        },
+        deleteItem(item) {
+            this.$store.commit('openConfirm', {
+                title: "删除类别",
+                text: "是否确认删除该类别",
+                func: this.deleteCategory,
+                params: item._id
+            })
+        },
+        deleteCategory(id) {
+            this.$api.category.deleteCategory(id).then( res => {
+                this.$store.commit('openSnackbar', {
+                    color: "success",
+                    text: res.msg,
+                })
+
+                this.getCategoryList();
             })
         }
     }
