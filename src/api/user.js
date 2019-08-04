@@ -6,6 +6,13 @@ const user = {
             username,
             password
         })
+    },
+    register({ username, password, register_code }) {
+        return axios.post('/user/register', {
+            username,
+            password,
+            register_code
+        })
     }
 }
 
