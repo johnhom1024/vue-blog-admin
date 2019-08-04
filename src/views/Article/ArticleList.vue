@@ -2,17 +2,10 @@
     v-card
         v-card-title.headline 文章列表
             v-spacer
-            v-dialog(v-model="articleDialog.show" presistent max-width="500px")
-                template(v-slot:activator="{ on }")
-                    v-btn(color="primary" v-on="on") 文章录入
-                v-card
-                    v-card-title.headline 文章信息录入
-                    v-card-text
-                        p hello
+            upload-article-dialog
         v-data-table(
             :items="article_list"
             :headers="headers"
-            :disable-initial-sort="true"
         )
             template(v-slot:items="props")
                 td {{ props.item.title }}
@@ -27,7 +20,11 @@
 
 
 <script>
+import uploadArticleDialog from './components/addArticleDialog.vue';
 export default {
+    components: {
+        uploadArticleDialog
+    },
     data() {
         return {
             articleDialog: {
@@ -68,7 +65,7 @@ export default {
     methods: {
         getArticleList() {
             this.$api.article.getArticleList().then(res => {
-                this.article_list = res;
+                this.article_list = res.result;
             });
         },
         deleteArticle(id) {
