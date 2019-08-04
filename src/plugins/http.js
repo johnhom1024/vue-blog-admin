@@ -43,7 +43,7 @@ _axios.interceptors.response.use(
         // Do something with response data
         let code = response.data.code;
         // success为请求成功的响应码
-        if (code === "success") {
+        if (code === "0") {
             if (response.data.data) {
                 return response.data.data;
             }
