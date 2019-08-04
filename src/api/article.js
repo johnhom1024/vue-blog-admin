@@ -9,9 +9,7 @@ const article = {
     deleteArticle(id) {
         return axios.delete(`/article/${id}`);
     },
-    getCategoryList() {
-        return axios.get("/category");
-    }
+    
 };
 
 export default article;
