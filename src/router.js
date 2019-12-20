@@ -3,9 +3,9 @@ import Router from "vue-router";
 
 const Index = () => import("@/pages/Index.vue");
 const Login = () => import("@/pages/Login.vue");
-const ArticleList = () => import('@/views/Article/ArticleList.vue');
-const Category = () => import('@/views/Article/Category.vue');
+const ArticleList = () => import('@/views/Article/article-list');
 const Dashboard = () => import('@/views/Dashboard/Dashboard.vue');
+const Tag = () => import("@/views/Article/tag");
 
 Vue.use(Router);
 
@@ -19,15 +19,15 @@ export default new Router({
             children: [
                 {
                     path: '',
-                    redirect: '/article_list'
+                    redirect: '/article'
                 },
                 {
-                    path: 'article_list',
+                    path: 'article',
                     component: ArticleList
                 },
                 {
-                    path: 'category_list',
-                    component: Category
+                    path: 'tag',
+                    component: Tag
                 },
                 {
                     path: 'dashboard',
