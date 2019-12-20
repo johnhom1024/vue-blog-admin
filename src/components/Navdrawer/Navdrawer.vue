@@ -1,7 +1,7 @@
 <template lang="pug">
     v-navigation-drawer(permanent app)
         v-app-bar(flat)
-        <v-divider></v-divider>
+        v-divider
         v-list
             template(v-for="item in nav")
                 v-list-group(
