@@ -42,14 +42,16 @@ _axios.interceptors.response.use(
     function(response) {
         // Do something with response data
         let code = response.data.code;
-        // success为请求成功的响应码
-        if (code === "0") {
-            if (response.data.data) {
-                return response.data.data;
-            }
-            return response.data;
+        switch (code) {
+            case 0:
+                if (response.data.data) {
+                    return response.data.data;
+                }
+                return response;
+            default:
+                break;
         }
-        return response;
+        return Promise.reject();
     },
     function(error) {
         // Do something with response error
