@@ -3,7 +3,7 @@
  * @since: 2019-08-04 10:38:31
  * @Author: jawnwa22
  * @LastEditors: jawnwa22
- * @LastEditTime: 2019-08-04 15:26:27
+ * @LastEditTime: 2019-08-06 18:00:51
  -->
 
 <template lang="pug">
@@ -15,7 +15,6 @@
             v-card-text
                 v-combobox(
                     v-model="chips"
-                    :items="items"
                     chips
                     clearable
                     multiple
@@ -65,7 +64,7 @@ export default {
                 })
                 return;
             }
-            this.$api.category.addCategory(this.chips).then( res => {
+            this.$api.tag.addTag(this.chips).then( res => {
                 this.$store.commit("openSnackbar", {
                     text: res.msg,
                     color: "success"
