@@ -17,3 +17,9 @@ jobs:
         version: 12
         # Optional registry to set up for auth. Will set the registry in a project level .npmrc and .yarnrc file, and set up auth to read in from env.NODE_AUTH_TOKEN
         registry-url: https://registry.npm.taobao.org/
+    - name: Install dependence
+      run: yarn 
+    - name: Build vue
+      run: yarn run build
+
+    
