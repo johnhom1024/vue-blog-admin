@@ -11,7 +11,7 @@ Vue.use(Router);
 
 export default new Router({
     mode: "history",
-    base: '/admin/',
+    base: '/admin',
     routes: [
         {
             path: "/",
