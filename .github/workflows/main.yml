@@ -22,7 +22,7 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.PRIVATE_KEY }}" >> ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        echo "StrictHostKeyChecking no" >> ~/.ssh/ssh_config
+        ssh-keyscan -t rsa 47.102.143.46 >> ~/.ssh/known_hosts
     - name: Install dependence
       run: yarn 
     - name: Build vue
