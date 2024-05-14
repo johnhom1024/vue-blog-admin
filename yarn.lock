@@ -7866,9 +7866,9 @@ shelljs@^0.8.3:
     rechoir "^0.6.2"
 
 shvl@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.npm.taobao.org/shvl/download/shvl-2.0.0.tgz#55fd550b6e81bf7574f2f576b8b5c1ffae74e10f"
-  integrity sha1-Vf1VC26Bv3V08vV2uLXB/6504Q8=
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/shvl/-/shvl-2.0.3.tgz#eb4bd37644f5684bba1fc52c3010c96fb5e6afd1"
+  integrity sha512-V7C6S9Hlol6SzOJPnQ7qzOVEWUQImt3BNmmzh40wObhla3XOYMe4gGiYzLrJd5TFa+cI2f9LKIRJTTKZSTbWgw==
 
 side-channel@^1.0.4:
   version "1.0.4"
